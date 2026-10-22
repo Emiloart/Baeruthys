@@ -55,7 +55,7 @@ export const DEPARTMENTS = [
     slug: 'office-school',
     name: 'Office, School & Stationery',
     description: 'Supplies for studying, working and getting organised.',
-    image: 'https://images.unsplash.com/photo-1455390582262-044cdoor3?auto=format&fit=crop&w=1400&q=85',
+    image: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=1400&q=85',
     categories: ['office-stationery', 'school-supplies'],
   },
   {
