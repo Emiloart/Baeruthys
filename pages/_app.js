@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Baeruthys. Elegant, trending fashion and lifestyle pieces: clothes, shoes, bags, jewelry, watches and more."
+          content="Baeruthys is your everyday online store for groceries, fresh produce, pantry staples, drinks, household essentials, homeware and more."
         />
         <meta name="theme-color" content="#FAF8F5" />
       </Head>
