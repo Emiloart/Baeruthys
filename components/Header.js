@@ -1,16 +1,15 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { CATEGORIES } from '../data/products'
+import { CATEGORIES, DEPARTMENTS } from '../data/products'
 import { useCart } from '../context/CartContext'
 
-const PRIMARY_DEPARTMENTS = ['fresh-produce', 'pantry', 'drinks', 'dairy-eggs', 'household', 'personal-care']
 const NAV_LINKS = [
-  ...CATEGORIES.filter((category) => PRIMARY_DEPARTMENTS.includes(category.slug)).map((category) => ({
-    label: category.name,
-    href: `/shop?category=${category.slug}`,
+  ...DEPARTMENTS.slice(0, 4).map((department) => ({
+    label: department.name,
+    href: `/shop?department=${department.slug}`,
   })),
-  { label: 'All departments', href: '/shop' },
+  { label: 'All departments', href: '/#departments' },
 ]
 
 export default function Header() {
@@ -85,11 +84,20 @@ export default function Header() {
 
       {menuOpen && (
         <nav className="border-t border-baer-bdr bg-white xl:hidden" aria-label="Mobile departments">
-          <div className="shell grid grid-cols-2 gap-x-5 py-2 sm:grid-cols-3">
-            {CATEGORIES.map((category) => (
-              <Link key={category.slug} href={`/shop?category=${category.slug}`} onClick={() => setMenuOpen(false)} className="border-b border-baer-bdr/60 py-3 text-sm text-baer-dark">
-                {category.name}
-              </Link>
+          <div className="shell grid gap-x-8 py-3 sm:grid-cols-2">
+            {DEPARTMENTS.map((department) => (
+              <div key={department.slug} className="border-b border-baer-bdr/70 py-3">
+                <Link href={`/shop?department=${department.slug}`} onClick={() => setMenuOpen(false)} className="block text-sm font-semibold text-baer-dark">
+                  {department.name}
+                </Link>
+                <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-2">
+                  {CATEGORIES.filter((category) => category.department === department.slug).map((category) => (
+                    <Link key={category.slug} href={`/shop?category=${category.slug}`} onClick={() => setMenuOpen(false)} className="py-1 text-xs leading-5 text-baer-mid hover:text-baer-dark">
+                      {category.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             ))}
             <Link href="/shop" onClick={() => setMenuOpen(false)} className="py-3 text-sm font-semibold text-baer-dark">Shop everything →</Link>
             <Link href="/wishlist" onClick={() => setMenuOpen(false)} className="py-3 text-sm text-baer-dark">Saved items{wishCount > 0 ? ` (${wishCount})` : ''}</Link>
