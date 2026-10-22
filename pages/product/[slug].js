@@ -184,7 +184,7 @@ export default function ProductPage({ product, related }) {
 
           <div className="flex flex-col gap-3 sm:flex-row">
             <button type="button" onClick={handleAdd} className="btn-dark flex-1 !py-4">
-              Add to Cart
+              Add to Basket
             </button>
             <button
               type="button"
