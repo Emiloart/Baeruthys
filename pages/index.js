@@ -37,10 +37,7 @@ export default function Home() {
       <section className="bg-baer-cream">
         <div className="shell grid items-center gap-8 py-10 sm:py-14 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14 lg:py-16">
           <div className="max-w-2xl">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-baer-bdr bg-white/70 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-baer-dark">
-              <span className="h-2 w-2 rounded-full bg-baer-gold" />
-              One store. More of life.
-            </div>
+            <p className="eyebrow mb-5">One store. More of life.</p>
             <h1 className="max-w-xl text-4xl font-bold leading-[1.08] text-baer-dark sm:text-5xl lg:text-6xl">
               Your whole list, <span className="font-normal italic">in one place.</span>
             </h1>
@@ -65,10 +62,10 @@ export default function Home() {
               </div>
               <div className="grid grid-rows-2">
                 <div className="overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1604719312566-8912e9c8a213?auto=format&fit=crop&w=900&q=85" alt="Grocery shelves and pantry staples" className="h-full w-full object-cover" />
+                  <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=900&q=85" alt="Home appliances and kitchen equipment" className="h-full w-full object-cover" />
                 </div>
                 <div className="overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=900&q=85" alt="Ingredients prepared for everyday cooking" className="h-full w-full object-cover" />
+                  <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=900&q=85" alt="Personal care and beauty essentials" className="h-full w-full object-cover" />
                 </div>
               </div>
             </div>
@@ -77,7 +74,7 @@ export default function Home() {
                 <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-baer-mid">The weekly shop</p>
                 <p className="mt-1 font-serif text-xl font-bold text-baer-dark sm:text-2xl">Good things, all together.</p>
               </div>
-              <Link href="/shop?category=fresh-produce" className="flex h-10 w-10 flex-shrink-0 items-center justify-center bg-baer-dark text-xl text-white transition-colors hover:bg-baer-ink" aria-label="Shop fresh produce">→</Link>
+              <Link href="/#departments" className="flex h-10 w-10 flex-shrink-0 items-center justify-center bg-baer-dark text-xl text-white transition-colors hover:bg-baer-ink" aria-label="Explore all departments">→</Link>
             </div>
           </div>
         </div>
@@ -87,17 +84,17 @@ export default function Home() {
 
       <section className="border-y border-baer-bdr bg-white">
         <div className="shell grid gap-4 py-5 sm:grid-cols-3 sm:gap-6">
-          <div className="flex items-start gap-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-baer-surf text-baer-dark">01</span>
-            <div><p className="text-sm font-semibold text-baer-dark">A bigger kind of store</p><p className="mt-1 text-xs leading-5 text-baer-mid">Groceries and everyday essentials together.</p></div>
+          <div className="border-l-2 border-baer-gold pl-4">
+            <p className="text-sm font-semibold text-baer-dark">A store for more of your list</p>
+            <p className="mt-1 text-xs leading-5 text-baer-mid">Food, home, personal care, technology and more.</p>
           </div>
-          <div className="flex items-start gap-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-baer-surf text-baer-dark">02</span>
-            <div><p className="text-sm font-semibold text-baer-dark">Shop your way</p><p className="mt-1 text-xs leading-5 text-baer-mid">Browse by department or search your list.</p></div>
+          <div className="border-l-2 border-baer-gold pl-4">
+            <p className="text-sm font-semibold text-baer-dark">Clear department structure</p>
+            <p className="mt-1 text-xs leading-5 text-baer-mid">Start broad, then move straight to the right section.</p>
           </div>
-          <div className="flex items-start gap-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-baer-surf text-baer-dark">03</span>
-            <div><p className="text-sm font-semibold text-baer-dark">Delivery details upfront</p><p className="mt-1 text-xs leading-5 text-baer-mid">Clear delivery options at checkout.</p></div>
+          <div className="border-l-2 border-baer-gold pl-4">
+            <p className="text-sm font-semibold text-baer-dark">One convenient basket</p>
+            <p className="mt-1 text-xs leading-5 text-baer-mid">Bring products from different departments together.</p>
           </div>
         </div>
       </section>
