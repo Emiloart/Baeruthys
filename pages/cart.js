@@ -37,7 +37,7 @@ export default function CartPage() {
   const progress = Math.min(100, Math.round((subtotal / FREE_SHIPPING_THRESHOLD) * 100))
 
   return (
-    <Layout title="Your Cart">
+    <Layout title="Your Basket">
       <div className="border-b border-baer-bdr bg-baer-bg">
         <div className="shell flex items-baseline gap-4 py-8">
           <h1 className="text-4xl font-bold text-baer-dark">Your Cart</h1>
@@ -53,7 +53,7 @@ export default function CartPage() {
         <div className="shell py-20 text-center text-sm text-baer-mid">Loading your cart...</div>
       ) : items.length === 0 ? (
         <div className="shell py-24 text-center">
-          <p className="font-serif text-3xl text-baer-dark">Your cart is empty</p>
+          <p className="font-serif text-3xl text-baer-dark">Your basket is empty</p>
           <p className="mt-3 text-sm text-baer-mid">Find something you love and it will appear here.</p>
           <Link href="/shop" className="btn-dark mt-8">
             Start Shopping
@@ -72,7 +72,7 @@ export default function CartPage() {
             <ul>
               {items.map((line) => {
                 const product = getProductBySlug(line.slug)
-                const details = [line.size ? `Size: ${line.size}` : null, line.color ? `Colour: ${line.color.name}` : null]
+                const details = [line.unit || 'Each', line.size ? `Size: ${line.size}` : null, line.color ? `Colour: ${line.color.name}` : null]
                   .filter(Boolean)
                   .join('  |  ')
 
