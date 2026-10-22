@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useMemo, useState } from 'react'
 import Layout from '../components/Layout'
 import ProductCard from '../components/ProductCard'
-import { CATEGORIES, PRODUCTS, getCategoryName } from '../data/products'
+import { CATEGORIES, DEPARTMENTS, PRODUCTS, getCategoryName, getDepartmentBySlug } from '../data/products'
 
 const PRICE_RANGES = [
   { id: 'u5', label: 'Under \u20A65,000', min: 0, max: 4999 },
@@ -48,8 +48,9 @@ function Check({ checked, onChange, label }) {
 
 export default function Shop() {
   const router = useRouter()
-  const { category = 'all', filter = '', q = '' } = router.query
+  const { category = 'all', department = 'all', filter = '', q = '' } = router.query
   const categorySlug = Array.isArray(category) ? category[0] : category
+  const departmentSlug = Array.isArray(department) ? department[0] : department
   const filterMode = Array.isArray(filter) ? filter[0] : filter
   const searchTerm = (Array.isArray(q) ? q[0] : q).trim().toLowerCase()
 
@@ -63,6 +64,10 @@ export default function Shop() {
   const baseProducts = useMemo(() => {
     return PRODUCTS.filter((p) => {
       if (categorySlug !== 'all' && p.category !== categorySlug) return false
+      if (departmentSlug !== 'all') {
+        const departmentCategories = CATEGORIES.filter((item) => item.department === departmentSlug).map((item) => item.slug)
+        if (!departmentCategories.includes(p.category)) return false
+      }
       if (filterMode === 'new' && p.tag !== 'New') return false
       if (filterMode === 'sale' && !p.compareAt) return false
       if (searchTerm) {
@@ -71,7 +76,7 @@ export default function Shop() {
       }
       return true
     })
-  }, [categorySlug, filterMode, searchTerm])
+  }, [categorySlug, departmentSlug, filterMode, searchTerm])
 
   const sizeOptions = useMemo(() => {
     const set = new Set()
@@ -106,6 +111,7 @@ export default function Shop() {
   else if (filterMode === 'new') heading = 'New Arrivals'
   else if (filterMode === 'sale') heading = 'Sale'
   else if (categorySlug !== 'all') heading = getCategoryName(categorySlug)
+  else if (departmentSlug !== 'all') heading = getDepartmentBySlug(departmentSlug)?.name || 'All Products'
 
   const hasActiveFilters = sizes.length || colors.length || ranges.length
 
@@ -117,21 +123,33 @@ export default function Shop() {
 
   const sidebar = (
     <div>
-      <FilterGroup title="Category">
+      <FilterGroup title="Departments">
         <Link
           href="/shop"
-          className={`block text-[13px] ${categorySlug === 'all' && !filterMode ? 'font-semibold text-baer-dark' : 'text-baer-mid hover:text-baer-dark'}`}
+          className={`block text-[13px] ${categorySlug === 'all' && departmentSlug === 'all' && !filterMode ? 'font-semibold text-baer-dark' : 'text-baer-mid hover:text-baer-dark'}`}
         >
-          All
+          All products
         </Link>
-        {CATEGORIES.map((c) => (
-          <Link
-            key={c.slug}
-            href={`/shop?category=${c.slug}`}
-            className={`block text-[13px] ${categorySlug === c.slug ? 'font-semibold text-baer-dark' : 'text-baer-mid hover:text-baer-dark'}`}
-          >
-            {c.name}
-          </Link>
+        {DEPARTMENTS.map((parent) => (
+          <div key={parent.slug} className="py-1">
+            <Link
+              href={`/shop?department=${parent.slug}`}
+              className={`block text-[13px] ${departmentSlug === parent.slug ? 'font-semibold text-baer-dark' : 'text-baer-mid hover:text-baer-dark'}`}
+            >
+              {parent.name}
+            </Link>
+            <div className="ml-3 mt-2 space-y-2 border-l border-baer-bdr pl-3">
+              {CATEGORIES.filter((item) => item.department === parent.slug).map((item) => (
+                <Link
+                  key={item.slug}
+                  href={`/shop?category=${item.slug}`}
+                  className={`block text-[12px] leading-5 ${categorySlug === item.slug ? 'font-semibold text-baer-dark' : 'text-baer-mid hover:text-baer-dark'}`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          </div>
         ))}
       </FilterGroup>
 
