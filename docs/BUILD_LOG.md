@@ -76,3 +76,15 @@ The catalogue is still illustrative data. Product prices, supplier availability,
 ## 8. Explicitly not verified
 
 This work was applied through the GitHub connector. A local Next.js production build, browser visual QA, image-by-image validation and end-to-end payment test were not run in this session. Do not interpret the commits as proof that those checks passed.
+
+## 9. Moving product advertising banner
+
+Added on 2026-10-22. Each file was committed to `main` before proceeding to the next.
+
+| File | Change | Commit |
+|---|---|---|
+| `components/ProductAdMarquee.js` | Added a continuously moving, looping product-promotion strip with linked fresh produce, pantry and household campaign cards. | `fe0e5dbe917934f8af2bbed35e20943d329454b8` |
+| `styles/globals.css` | Added responsive card styling, seamless track animation, hover/focus pause and reduced-motion handling. Existing palette values were preserved. | `a3ea909f93de4504a6f32ea61d1f9b4093eb5781` |
+| `pages/index.js` | Mounted the advertising strip directly below the homepage hero. | `0c5cb2f8cfeb11748c54c27de9d756cc20b2f394` |
+
+The current cards are editorial category promotions, not paid advertiser inventory and do not claim unverified discounts. Future campaign data can be connected to a managed promotions source. The browser animation and production build have not been visually tested in this session.
