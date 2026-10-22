@@ -36,7 +36,7 @@ Each file below was committed directly to `main` before the next file was writte
 | `components/Footer.js` | Replaced fashion-led footer links with supermarket department links and customer-care labels. | `63916f0edbb5eb81a20baf37c93ac7023d57762a` |
 | `pages/_app.js` | Updated global metadata to describe the multi-department store; retained the existing theme colour. | `bde8c8426c712172e63bdfe4dc8804f5e96e29e6` |
 | `README.md` | Rewrote the project documentation around the new direction, existing stack, limitations, palette and roadmap. | `05e44af3a94fedd2a2e916e8d9642cfc8b3db08b` |
-| `pages/product/[slug].js` | Shows product department and pack unit, and uses basket language. | `7dd64b5f17009111a84af8cfe755df3856665fef` |
+| `pages/product/[slug].js` | Shows product department and pack unit, and uses basket language. | `7dd64b5f17009111a84af8cfe755df3856665fef`, followed by basket-label alignment in `11008ff6c83a2d4b01c19b578811196f3bbdc8fd` |
 | `context/CartContext.js` | Preserves a product's unit on basket line items. | `cfa7b95ea12721f354ff590c864f9cfd203bea74` |
 | `pages/cart.js` | Displays product units in the basket and uses basket terminology. | `6312056711114164054747468dd9d4f37166b5fd` |
 
