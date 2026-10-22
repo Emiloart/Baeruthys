@@ -2,107 +2,77 @@
 
 Last updated: 2026-10-22
 
-This log records how the project got to its current state, including what did not work, so the next session starts from facts.
+This file records repository state and implementation decisions. Treat completed work as distinct from planned work and from production capabilities that have not been connected or tested.
 
-## 1. Planning decisions
+## 1. Product direction
 
-| Decision | Outcome | Reason |
+Baeruthys is being developed as a **large, modern online supermarket and everyday store**, rather than a fashion-only storefront. The experience should bring multiple shopping missions into one basket: groceries, fresh produce, pantry staples, drinks, dairy and eggs, meat and seafood, bakery, household supplies, personal care, home and kitchen, electronics, fashion, and baby and kids' essentials.
+
+The existing brand palette is a hard constraint. Do not change the warm white, cream, dark neutral, border and gold tokens in `tailwind.config.js`. The visual evolution should come from information architecture, merchandising, photography, responsive layout and the shopping flow.
+
+## 2. Verified repository baseline
+
+- Framework: Next.js 14 Pages Router, React 18 and Tailwind CSS 3.
+- Currency: Nigerian naira (NGN).
+- Shared UI: header, footer, layout, product cards and product image component.
+- Shop: category and search routing, price filtering, colour/size filters when product data supports them, and sorting.
+- Product detail pages are statically generated from the product catalogue.
+- Basket and saved items use React context and browser local storage.
+- Checkout and policy routes exist in the repository, but payment processing is explicitly disabled in `lib/site.js`.
+- No production supplier feed, authoritative inventory, persisted customer account or confirmed payment integration is represented by this frontend.
+
+The original README understated the amount of existing work and still described a fashion-led storefront. It has been rewritten to reflect the current supermarket direction and distinguish the storefront from unfinished commerce infrastructure.
+
+## 3. Work completed on 2026-10-22
+
+Each file below was committed directly to `main` before the next file was written.
+
+| File | Change | Commit |
 |---|---|---|
-| Business model | Dropshipping | Chosen over print-on-demand, digital products, affiliate marketing and reselling. It was judged the most achievable first business |
-| Website approach | Hand-coded site, not Shopify | Cuts recurring cost to domain (roughly 10 to 15 USD a year) and hosting (roughly 3 to 10 USD a month) instead of a platform subscription |
-| Traffic | Paid ads | Faster than organic. Plan is to test one product at a small daily budget before scaling |
-| Brand name | Baeruthys | Chosen by the owner |
-| Look and feel | Classic, warm white and cream layout and borders | Owner asked for elegance and class |
-| Catalog | Broad and trend-led | Items depend on what producers have available |
+| `data/products.js` | Replaced fashion-only starter catalogue with a multi-department sample catalogue, category taxonomy, product units, imagery and refreshed featured/new-arrival helpers. | `59eb4cca080cf2587251b45a3d9cedd86623c660` |
+| `pages/index.js` | Rebuilt the homepage around a supermarket-led hero, department grid, everyday favourites, cross-department shopping message and delivery information. | `fbfe90b17fe303562ecbfa8974bc1ae64b9c9d1d` |
+| `components/Header.js` | Changed desktop and mobile navigation to departments, updated search language and basket/saved-item labels. | `ea69f7129e71ab3a9c6e00fa5c0b0b25db329ec1` |
+| `components/ProductCard.js` | Added support for the Popular label, product unit display, basket-oriented actions and denser responsive supermarket cards. | `f6df107f465cf44d50a14793cf48a43620503025` |
+| `components/Footer.js` | Replaced fashion-led footer links with supermarket department links and customer-care labels. | `63916f0edbb5eb81a20baf37c93ac7023d57762a` |
+| `pages/_app.js` | Updated global metadata to describe the multi-department store; retained the existing theme colour. | `bde8c8426c712172e63bdfe4dc8804f5e96e29e6` |
+| `README.md` | Rewrote the project documentation around the new direction, existing stack, limitations, palette and roadmap. | `05e44af3a94fedd2a2e916e8d9642cfc8b3db08b` |
+| `pages/product/[slug].js` | Shows product department and pack unit, and uses basket language. | `7dd64b5f17009111a84af8cfe755df3856665fef` |
+| `context/CartContext.js` | Preserves a product's unit on basket line items. | `cfa7b95ea12721f354ff590c864f9cfd203bea74` |
+| `pages/cart.js` | Displays product units in the basket and uses basket terminology. | `6312056711114164054747468dd9d4f37166b5fd` |
 
-Suggested learning sources were beginner YouTube dropshipping channels, supplier blogs (DSers, Zendrop, Spocket), r/dropship, and low-cost Udemy courses.
+## 4. Current catalogue state
 
-## 2. Design phase in Figma
+The starter catalogue now includes sample items across fresh produce, pantry, drinks, dairy and eggs, meat and seafood, bakery, household cleaning, personal care, home and kitchen, and electronics. The taxonomy also reserves categories for fashion and baby/kids.
 
-File: https://www.figma.com/design/YRtZcdExdJA2qsPaDWTArV
+The catalogue is still illustrative data. Product prices, supplier availability, pack sizes, image rights, product descriptions and delivery feasibility must be verified before launch. A department in the navigation does not imply it is stocked. Add products only as reliable catalogue data becomes available.
 
-A design file was created through the Figma connector and populated by running Figma Plugin API scripts.
+## 5. Design constraints
 
-### Attempt 1: six pages, Playfair Display headings
+- Preserve the existing palette: `#FAF8F5`, `#F4EEE5`, `#EFE8DC`, `#E7DCCF`, `#1C1C1C`, `#7A7068`, `#C9A86F`, and `#121212`.
+- Build the experience as a supermarket with department navigation and cross-category basket shopping, not as a fashion landing page with grocery items substituted into the cards.
+- Prioritise readable product names, pack/unit information, clear prices, quick basket actions, search, filters and mobile usability.
+- Keep claims about delivery, stock, food quality and payment grounded in real operating capabilities.
+- Product imagery currently uses remote image URLs. Verify each image's relevance, licensing and availability before launch.
 
-The script tried to create six Figma pages (homepage, shop, product detail, cart, checkout, confirmation) using Playfair Display and Inter. The file opened with an empty page and no frames. Likely causes were the font load and the multi-page creation approach. The exact cause was not confirmed.
+## 6. Commerce and safety boundaries
 
-### Attempt 2: single page, Inter only
+- `PAYMENTS_LIVE` remains `false`; no real payment should be represented as available.
+- Browser-local basket data is not a server-side order record and is not synced across devices.
+- Supplier ordering, inventory reconciliation, order persistence, payment webhooks, refunds, fulfilment and customer accounts are not yet production-connected.
+- Do not put payment secrets or supplier credentials in frontend code.
+- Before live sales, validate price and stock server-side, make payment/order handling idempotent, secure customer data and publish accurate policies.
 
-The homepage was rebuilt on one canvas page using Inter only. This produced the homepage content: navbar, hero, announcement strip, six category tiles, four featured products, brand quote, four new arrivals, trust badges, newsletter and footer.
+## 7. Next steps
 
-### Attempt 3: remaining five pages
+1. Run `npm run build` in a Node environment with dependency installation available; fix any build or lint failures before claiming validation.
+2. Test every category route, product detail, search query, filters, basket persistence, quantity controls, saved items and checkout states at mobile and desktop widths.
+3. Check remote product and department images for correctness and rights; replace placeholders with approved product photography.
+4. Add unit-price display where comparable units exist, stock and availability state, shopping lists and repeat-purchase affordances.
+5. Choose a supplier and define catalogue import, price updates, substitutions, perishable handling and stock freshness.
+6. Design server-side basket/order persistence, customer accounts, payment integration, delivery coverage and delivery-slot selection.
+7. Build internal operations for catalogue management, picking, fulfilment exceptions, refunds and customer support.
+8. Add tests, accessibility checks, performance monitoring, analytics consent and launch readiness review.
 
-A second script for the shop, product detail, cart, checkout and confirmation frames was prepared. The connector dropped mid-session, so the script was handed over to run manually in Figma. That route failed: the Console CLI plugin on the owner's phone is a command shell with its own commands (ls, find, shape and so on) and does not execute JavaScript. After the connector returned, the script was run again. The call returned no output.
+## 8. Explicitly not verified
 
-### Verified state on 2026-10-22
-
-A metadata read of the Figma file shows one canvas page. It contains the Homepage frame. Pages 2 to 6 are not present. Several homepage sections (navbar, hero, featured products, footer and others) exist as separate frames on the canvas with offset coordinates instead of sitting inside the homepage frame. Earlier messages in the session that described all six pages as complete were wrong.
-
-## 3. Page specifications (not yet drawn)
-
-These are the intended designs for pages 2 to 6, recorded so they can be built in Figma or directly in code.
-
-### Shop
-
-- Breadcrumb: Home / Clothes
-- Category header: Women's Clothes, 124 products
-- Left filter sidebar: Category, Size, Price range, Colour
-- Sort bar: showing 1 to 12 of 124, sort by Featured
-- Product grid: 4 columns, 12 cards, each with image, name, price, Add to Cart
-
-### Product detail
-
-- Thumbnail strip with four images and a large main image
-- Collection label, product title, star rating, price, stock note
-- Size selector (XS to XL), colour swatches, quantity control
-- Add to Cart and Wishlist buttons
-- Description block
-- Related products row (You May Also Like)
-
-### Cart
-
-- Table of line items: product, price, quantity control, line total, remove
-- Order summary panel: subtotal, shipping, discount, total
-- Promo code field, Proceed to Checkout, Continue Shopping
-
-### Checkout
-
-- Step indicator: Cart, Delivery, Payment, Confirm
-- Delivery form: full name, phone, email, street address, city, state, country
-- Delivery method: Standard (3 to 5 business days), Express (1 to 2 business days), Pick-up station
-- Right panel: order summary and payment method (card, bank transfer, USSD, pay on delivery), Place Order
-
-### Order confirmation
-
-- Success mark, order number, email confirmation note, delivery estimate
-- Track My Order and Continue Shopping
-
-## 4. Code state
-
-The repository holds a Next.js 14 and Tailwind 3 scaffold:
-
-- `components/Layout.js`, `Header.js`, `Footer.js`, `ProductCard.js`
-- `pages/_app.js` and `pages/index.js` (hero plus a 12 product grid using hard-coded sample products and naira prices)
-- `styles/globals.css`, `tailwind.config.js`, `postcss.config.js`
-
-The code home page is a simplified version of the Figma homepage. It does not yet include the announcement strip, category tiles, brand quote, new arrivals, trust badges or newsletter sections, and it has no cart state.
-
-Branches: `main` and `feat/figma-ui`. At the time of writing the file listing of `feat/figma-ui` matches `main`.
-
-## 5. Open problems
-
-1. Tailwind config is invalid JavaScript (unquoted hyphenated keys), so the app will not build.
-2. Colour values differ slightly between Figma and Tailwind.
-3. Figma homepage needs regrouping, and pages 2 to 6 need to be drawn.
-4. No product data source, cart state, checkout logic or payment provider.
-5. No supplier chosen and no order handoff process defined.
-
-## 6. Next steps
-
-1. Quote the keys in `tailwind.config.js` and verify the dev server starts.
-2. Align the palette between Figma and code.
-3. Regroup the Figma homepage into one frame, then build pages 2 to 6 from the specs above.
-4. Implement pages and a client-side cart in code.
-5. Select a payment provider and a supplier workflow.
-6. Add policy pages, deploy, and connect the domain.
+This work was applied through the GitHub connector. A local Next.js production build, browser visual QA, image-by-image validation and end-to-end payment test were not run in this session. Do not interpret the commits as proof that those checks passed.
