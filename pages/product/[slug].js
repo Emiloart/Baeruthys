@@ -81,10 +81,11 @@ export default function ProductPage({ product, related }) {
         </div>
 
         <div>
-          <div className="eyebrow">Baeruthys Collection</div>
+          <div className="eyebrow">{getCategoryName(product.category)}</div>
           <h1 className="mt-3 text-4xl font-bold text-baer-dark">{product.name}</h1>
 
-          <div className="mt-5 flex items-baseline gap-3">
+          <p className="mt-2 text-sm text-baer-mid">{product.unit || 'Each'}</p>
+          <div className="mt-4 flex items-baseline gap-3">
             <span className="font-serif text-3xl font-bold text-baer-dark">{formatNaira(product.price)}</span>
             {product.compareAt ? (
               <span className="text-base text-baer-mid line-through">{formatNaira(product.compareAt)}</span>
@@ -151,7 +152,7 @@ export default function ProductPage({ product, related }) {
           )}
 
           <div className="mb-6">
-            <div className="field-label">Quantity</div>
+            <div className="field-label">Quantity{product.unit ? ` · ${product.unit}` : ''}</div>
             <div className="inline-flex items-center rounded-sm border border-baer-bdr bg-white">
               <button
                 type="button"
@@ -197,9 +198,9 @@ export default function ProductPage({ product, related }) {
 
           {added ? (
             <p role="status" className="mt-4 text-sm text-baer-dark">
-              Added to your cart.{' '}
+              Added to your basket.{' '}
               <Link href="/cart" className="font-medium text-baer-gold underline">
-                View cart
+                View basket
               </Link>
             </p>
           ) : null}
