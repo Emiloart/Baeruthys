@@ -1,141 +1,101 @@
 # Baeruthys
 
-Baeruthys is a custom-built online storefront for a dropshipping brand selling trending fashion and lifestyle items. The brand direction is classic and warm: cream and warm white surfaces, soft borders, gold accents, and generous spacing.
+**Baeruthys is being built as a modern, multi-department online supermarket**, not a fashion-only storefront. The intended experience brings groceries and fresh produce together with pantry staples, drinks, dairy, meat and seafood, bakery, household and personal-care products, home and kitchen items, electronics, fashion, and baby and kids' essentials.
 
-The store is hand-coded (Next.js and Tailwind CSS) instead of being hosted on a paid platform such as Shopify. Running costs are limited to a domain and hosting.
+The visual identity remains the existing warm-white, cream, dark-neutral and gold palette. The redesign changes the store's scope and shopping experience, not its colours.
 
-## Project status
+## Current build
 
-| Area | State |
+The repository is a hand-coded Next.js storefront. The current implementation includes:
+
+- Responsive homepage with a supermarket-led hero, department browsing, featured products, new arrivals and delivery messaging.
+- Department-led navigation, mobile department menu and product search.
+- A starter catalogue spanning multiple supermarket departments, with product units and product imagery.
+- Shop page with category, search, price, colour and size filtering where relevant, plus sorting.
+- Product detail pages, related products and option selection where relevant.
+- Client-side basket and saved-items list persisted in browser local storage.
+- Cart quantity controls, subtotal, delivery threshold messaging, promo-code and checkout flow scaffolding.
+- Nigerian naira (NGN) price formatting.
+
+## Important status and limitations
+
+This is an active storefront build, not yet a production-ready commerce operation.
+
+- Catalogue entries and prices are demonstration data. They must be verified against real suppliers, current availability and actual margins before selling.
+- Product photos are remote illustrative images and need to be checked for relevance, licensing and long-term availability.
+- The basket and saved items are browser-local; they are not synced across devices or customer accounts.
+- Payment processing is not live. `PAYMENTS_LIVE` remains `false` in `lib/site.js`; do not represent checkout as taking payment until a provider and server-side order workflow are implemented and tested.
+- Supplier integration, authoritative inventory, order management, customer accounts, delivery integrations and operational support workflows remain future work.
+- Some department categories are present in navigation before their catalogues are populated. Expand the catalogue department by department rather than presenting empty departments as fully stocked.
+
+## Technology
+
+| Layer | Current choice |
 |---|---|
-| Brand and product scope | Defined |
-| Figma design | Homepage only. Shop, product detail, cart, checkout and confirmation are specified in docs/BUILD_LOG.md but not yet drawn |
-| Code | Scaffold plus a first home page (header, footer, layout, product card, hero, 12 product grid) |
-| Cart, checkout, payments | Not started |
-| Supplier integration | Not started |
-| Deployment | Not started |
+| Framework | Next.js 14 Pages Router |
+| UI | React 18 |
+| Styling | Tailwind CSS 3 |
+| Fonts | Inter and Playfair Display via `next/font` |
+| Basket and saved items | React context + browser local storage |
+| Currency | Nigerian naira (NGN) |
+| Deployment | Not confirmed in this repository |
 
-See [docs/BUILD_LOG.md](docs/BUILD_LOG.md) for the full record of decisions, what was built, what failed, and what is next.
+## Brand palette
 
-## Business model
+These existing design tokens are intentionally preserved.
 
-The store uses dropshipping. The seller holds no inventory.
-
-1. A customer buys an item from the Baeruthys storefront at the retail price.
-2. The seller places the order with the supplier at the wholesale price and supplies the customer's delivery address.
-3. The supplier ships directly to the customer.
-4. The seller keeps the difference between retail and wholesale price.
-
-Traffic is planned to come from paid ads. The catalog is intentionally broad and changes with supplier availability.
-
-## Catalog scope
-
-Trending items, selected by what producers can supply:
-
-- Clothes
-- Shoes
-- Bags
-- Eyeglasses
-- Hair
-- Nails
-- Bracelets
-- Earrings
-- Wrist watches
-- Key holders
-- Phone pouches
-
-Prices are shown in Nigerian naira (NGN).
-
-## Tech stack
-
-| Layer | Choice |
-|---|---|
-| Framework | Next.js 14.0.0 (pages router) |
-| UI | React 18.2.0 |
-| Styling | Tailwind CSS 3.4.4 with PostCSS and Autoprefixer |
-| Design source | Figma |
-
-Backend, database and payment provider have not been chosen yet. Options considered during planning: Node.js or PHP for the backend, MySQL or Firebase for data, and Stripe, PayPal or Flutterwave for payments. Because the target market is Nigeria, local payment methods (card, bank transfer, USSD, pay on delivery) are part of the checkout design.
-
-## Design system
-
-Palette, as drawn in Figma:
-
-| Token | Figma value | Use |
+| Token | Value | Use |
 |---|---|---|
-| bg | #FAF8F5 | Page background (warm white) |
-| surf | #F4EEE5 | Cream surfaces, sections, image placeholders |
-| bdr | #E7DCCF | Borders and dividers |
-| dark | #1C1C1C | Primary text, primary buttons |
-| mid | #7A7068 | Secondary text |
-| gold | #C9A86F | Accents, labels, primary highlight |
+| `baer-bg` | `#FAF8F5` | Main page background |
+| `baer-surf` | `#F4EEE5` | Secondary surfaces |
+| `baer-cream` | `#EFE8DC` | Feature sections |
+| `baer-bdr` | `#E7DCCF` | Borders and dividers |
+| `baer-dark` | `#1C1C1C` | Main text and primary actions |
+| `baer-mid` | `#7A7068` | Secondary text |
+| `baer-gold` | `#C9A86F` | Accent |
+| `baer-ink` | `#121212` | Footer and deep surfaces |
 
-The palette in `tailwind.config.js` is close but not identical. See Known issues.
+Do not replace the palette as part of future supermarket UX work. Improve hierarchy, imagery, spacing, navigation and shopping flows within this system.
 
-Typography: the intended pairing is Playfair Display for headings and Inter for body text. The Figma homepage currently uses Inter throughout.
+## Run locally
 
-Layout: 1440 px desktop canvas, 80 px side margins, 4 px card radius, 2 px button radius, 1 px borders.
+Requirements: a compatible Node.js installation and npm.
 
-## Site structure
-
-1. Homepage: navbar, hero, announcement strip, category tiles, featured products, brand quote, new arrivals, trust badges, newsletter, footer
-2. Shop: breadcrumb, category header, filter sidebar, sort bar, product grid
-3. Product detail: image gallery, size and colour selectors, quantity, add to cart, wishlist, description, related products
-4. Cart: line items, quantity controls, order summary, promo code
-5. Checkout: delivery details, delivery method, order summary, payment method
-6. Order confirmation: order number, delivery estimate, track order
-
-Only page 1 exists in Figma today. The code implements a simplified home page.
-
-## Repository layout
-
-```
-components/
-  Header.js
-  Footer.js
-  Layout.js
-  ProductCard.js
-pages/
-  _app.js
-  index.js
-styles/
-  globals.css
-package.json
-postcss.config.js
-tailwind.config.js
-docs/
-  BUILD_LOG.md
-```
-
-## Getting started
-
-```
+```bash
 npm install
 npm run dev
 ```
 
-The dev server runs at http://localhost:3000. Production build: `npm run build` then `npm start`.
+Open [http://localhost:3000](http://localhost:3000).
 
-Note: the build currently fails until the Tailwind config issue below is fixed.
+For a production compilation:
 
-## Known issues
-
-1. `tailwind.config.js` uses unquoted object keys containing hyphens (`baer-bg: '#F9F8F5'`). That is invalid JavaScript. The keys must be quoted (`'baer-bg': '#F9F8F5'`) or renamed (`baerBg`) before Tailwind will load.
-2. Palette drift between code and Figma: surf is #F4EED7 in code against #F4EEE5 in Figma, gold is #C89E6F against #C9A86F, bg is #F9F8F5 against #FAF8F5, bdr is #E8DCD0 against #E7DCCF. Pick one source of truth and align the other.
-3. The Figma homepage sections sit loose on the canvas instead of inside the homepage frame and need regrouping.
-4. `feat/figma-ui` is described in earlier notes as holding the full UI, but at the time of writing its file tree matches `main`.
+```bash
+npm run build
+npm start
+```
 
 ## Roadmap
 
-1. Fix the Tailwind config and confirm `npm run dev` runs clean.
-2. Regroup the Figma homepage and draw pages 2 to 6.
-3. Build the shop, product detail, cart, checkout and confirmation pages in code.
-4. Choose and integrate a payment provider.
-5. Choose a supplier workflow and decide how orders are passed to the supplier.
-6. Add policy pages: refund, privacy, shipping, terms.
-7. Deploy and attach the domain.
-8. Prepare ad creative and tracking before spending on ads.
+1. **Validate the storefront:** run the production build, inspect responsive layouts, verify every department route and check all product images.
+2. **Complete the catalogue model:** product identifiers, SKU, unit and pack size, supplier, stock state, price provenance, category taxonomy, substitutions and perishable-item handling.
+3. **Build reliable commerce services:** server-side basket validation, customer identity, persisted orders, inventory reservation, payment integration, idempotent payment webhooks and order status history.
+4. **Design supermarket-specific shopping:** shopping lists, repeat purchases, department filters, unit-price comparison, availability indicators, substitutions and delivery-slot selection.
+5. **Add operations tooling:** product and price management, supplier imports, order picking, fulfilment exceptions, refunds and customer support.
+6. **Establish trust and compliance:** accurate delivery and returns policies, privacy disclosures, terms, food handling and allergen information where relevant, and secure payment practices.
+7. **Test before launch:** mobile and desktop QA, keyboard accessibility, empty and error states, checkout failure handling, performance, image rights, SEO and analytics consent.
+8. **Connect real operations:** select suppliers, delivery coverage, payment methods, stock update cadence and customer service processes before marketing the store as live.
 
-## Brand
+## Repository layout
 
-Name: Baeruthys. Tagline used in the design: Elegance in every detail.
+```
+components/   Shared layout, navigation and product components
+context/      Client-side basket and saved-items state
+data/         Starter product and department catalogue
+docs/         Build log and implementation decisions
+lib/          Store settings and formatting utilities
+pages/        Next.js pages and commerce routes
+styles/       Global styles and Tailwind layers
+```
+
+See [docs/BUILD_LOG.md](docs/BUILD_LOG.md) for build history, verified status and the next implementation steps.
