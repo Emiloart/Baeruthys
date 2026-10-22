@@ -1,19 +1,117 @@
-// Starter catalog for the Baeruthys multi-department online supermarket.
-// Product records are demonstration data until supplier, pricing and availability feeds are connected.
+// Starter catalogue for Baeruthys. Product records remain demonstration data until supplier,
+// pricing, stock and availability feeds are connected.
+
+export const DEPARTMENTS = [
+  {
+    slug: 'food-groceries',
+    name: 'Food & Groceries',
+    description: 'Fresh food, pantry staples and everything for the everyday shop.',
+    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1400&q=85',
+    categories: ['fresh-produce', 'meat-seafood', 'dairy-eggs', 'bakery', 'pantry', 'drinks', 'snacks', 'frozen-foods'],
+  },
+  {
+    slug: 'home-living',
+    name: 'Home & Living',
+    description: 'Appliances, kitchen essentials and thoughtful things for every room.',
+    image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1400&q=85',
+    categories: ['appliances', 'home-kitchen', 'household', 'furniture-decor', 'bedding-bath', 'storage-organisation', 'lighting', 'home-improvement'],
+  },
+  {
+    slug: 'beauty-personal-care',
+    name: 'Beauty & Personal Care',
+    description: 'Everyday care, grooming and beauty essentials.',
+    image: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1400&q=85',
+    categories: ['personal-care', 'skincare-beauty', 'haircare', 'fragrance-grooming'],
+  },
+  {
+    slug: 'electronics-technology',
+    name: 'Electronics & Technology',
+    description: 'Personal technology, entertainment and useful accessories.',
+    image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=1400&q=85',
+    categories: ['electronics', 'phones-computing', 'tv-audio', 'tech-accessories'],
+  },
+  {
+    slug: 'fashion-accessories',
+    name: 'Fashion & Accessories',
+    description: 'Clothing, footwear, bags and finishing touches.',
+    image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1400&q=85',
+    categories: ['fashion', 'footwear-bags', 'fashion-accessories'],
+  },
+  {
+    slug: 'baby-kids',
+    name: 'Baby & Kids',
+    description: 'Practical essentials for babies, children and family routines.',
+    image: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=1400&q=85',
+    categories: ['baby-kids', 'baby-feeding-care', 'toys-games'],
+  },
+  {
+    slug: 'health-wellness',
+    name: 'Health & Wellness',
+    description: 'Everyday wellbeing and personal health essentials.',
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1400&q=85',
+    categories: ['health-wellness', 'first-aid'],
+  },
+  {
+    slug: 'office-school',
+    name: 'Office, School & Stationery',
+    description: 'Supplies for studying, working and getting organised.',
+    image: 'https://images.unsplash.com/photo-1455390582262-044cdoor3?auto=format&fit=crop&w=1400&q=85',
+    categories: ['office-stationery', 'school-supplies'],
+  },
+  {
+    slug: 'outdoor-garden-diy',
+    name: 'Outdoor, Garden & DIY',
+    description: 'Tools and essentials for projects, gardens and outdoor spaces.',
+    image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1400&q=85',
+    categories: ['garden-outdoor', 'tools-hardware'],
+  },
+  {
+    slug: 'pet-supplies',
+    name: 'Pet Supplies',
+    description: 'Food, care and accessories for household pets.',
+    image: 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=1400&q=85',
+    categories: ['pet-supplies'],
+  },
+]
 
 export const CATEGORIES = [
-  { slug: 'fresh-produce', name: 'Fresh Produce' },
-  { slug: 'pantry', name: 'Pantry & Staples' },
-  { slug: 'drinks', name: 'Drinks' },
-  { slug: 'dairy-eggs', name: 'Dairy & Eggs' },
-  { slug: 'meat-seafood', name: 'Meat & Seafood' },
-  { slug: 'bakery', name: 'Bakery' },
-  { slug: 'household', name: 'Home Care' },
-  { slug: 'personal-care', name: 'Personal Care' },
-  { slug: 'home-kitchen', name: 'Home & Kitchen' },
-  { slug: 'electronics', name: 'Electronics' },
-  { slug: 'fashion', name: 'Fashion' },
-  { slug: 'baby-kids', name: 'Baby & Kids' },
+  { slug: 'fresh-produce', name: 'Fresh Produce', department: 'food-groceries' },
+  { slug: 'meat-seafood', name: 'Meat, Fish & Seafood', department: 'food-groceries' },
+  { slug: 'dairy-eggs', name: 'Dairy, Eggs & Chilled', department: 'food-groceries' },
+  { slug: 'bakery', name: 'Bakery & Desserts', department: 'food-groceries' },
+  { slug: 'pantry', name: 'Pantry & Cooking Essentials', department: 'food-groceries' },
+  { slug: 'drinks', name: 'Drinks & Beverages', department: 'food-groceries' },
+  { slug: 'snacks', name: 'Snacks & Confectionery', department: 'food-groceries' },
+  { slug: 'frozen-foods', name: 'Frozen Foods', department: 'food-groceries' },
+  { slug: 'appliances', name: 'Home Appliances', department: 'home-living' },
+  { slug: 'home-kitchen', name: 'Kitchen & Dining', department: 'home-living' },
+  { slug: 'household', name: 'Cleaning & Household Care', department: 'home-living' },
+  { slug: 'furniture-decor', name: 'Furniture & Decor', department: 'home-living' },
+  { slug: 'bedding-bath', name: 'Bedding & Bath', department: 'home-living' },
+  { slug: 'storage-organisation', name: 'Storage & Organisation', department: 'home-living' },
+  { slug: 'lighting', name: 'Lighting', department: 'home-living' },
+  { slug: 'home-improvement', name: 'Home Improvement', department: 'home-living' },
+  { slug: 'personal-care', name: 'Personal Care', department: 'beauty-personal-care' },
+  { slug: 'skincare-beauty', name: 'Skincare & Beauty', department: 'beauty-personal-care' },
+  { slug: 'haircare', name: 'Haircare', department: 'beauty-personal-care' },
+  { slug: 'fragrance-grooming', name: 'Fragrance & Grooming', department: 'beauty-personal-care' },
+  { slug: 'electronics', name: 'Electronics', department: 'electronics-technology' },
+  { slug: 'phones-computing', name: 'Phones & Computing', department: 'electronics-technology' },
+  { slug: 'tv-audio', name: 'TV & Audio', department: 'electronics-technology' },
+  { slug: 'tech-accessories', name: 'Technology Accessories', department: 'electronics-technology' },
+  { slug: 'fashion', name: 'Clothing', department: 'fashion-accessories' },
+  { slug: 'footwear-bags', name: 'Footwear & Bags', department: 'fashion-accessories' },
+  { slug: 'fashion-accessories', name: 'Fashion Accessories', department: 'fashion-accessories' },
+  { slug: 'baby-kids', name: 'Baby & Kids Essentials', department: 'baby-kids' },
+  { slug: 'baby-feeding-care', name: 'Baby Feeding & Care', department: 'baby-kids' },
+  { slug: 'toys-games', name: 'Toys & Games', department: 'baby-kids' },
+  { slug: 'health-wellness', name: 'Health & Wellness', department: 'health-wellness' },
+  { slug: 'first-aid', name: 'First Aid', department: 'health-wellness' },
+  { slug: 'office-stationery', name: 'Office & Stationery', department: 'office-school' },
+  { slug: 'school-supplies', name: 'School Supplies', department: 'office-school' },
+  { slug: 'garden-outdoor', name: 'Garden & Outdoor', department: 'outdoor-garden-diy' },
+  { slug: 'tools-hardware', name: 'Tools & Hardware', department: 'outdoor-garden-diy' },
+  { slug: 'pet-supplies', name: 'Pet Supplies', department: 'pet-supplies' },
 ]
 
 const C = {
@@ -63,6 +161,20 @@ export function getProductsByCategory(categorySlug) {
 export function getCategoryName(categorySlug) {
   const match = CATEGORIES.find((c) => c.slug === categorySlug)
   return match ? match.name : 'All Products'
+}
+
+export function getDepartmentBySlug(departmentSlug) {
+  return DEPARTMENTS.find((department) => department.slug === departmentSlug) || null
+}
+
+export function getDepartmentCategories(departmentSlug) {
+  const department = getDepartmentBySlug(departmentSlug)
+  return department ? CATEGORIES.filter((category) => category.department === department.slug) : []
+}
+
+export function getDepartmentForCategory(categorySlug) {
+  const category = CATEGORIES.find((item) => item.slug === categorySlug)
+  return category ? getDepartmentBySlug(category.department) : null
 }
 
 export function getRelatedProducts(product, limit = 4) {
