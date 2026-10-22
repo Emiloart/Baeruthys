@@ -267,11 +267,20 @@ export default function Shop() {
 
           {results.length === 0 ? (
             <div className="py-20 text-center">
-              <p className="font-serif text-2xl text-baer-dark">No products found</p>
-              <p className="mt-2 text-sm text-baer-mid">Try removing a filter or searching for something else.</p>
-              <Link href="/shop" className="btn-dark mt-6">
-                View all products
-              </Link>
+              <p className="font-serif text-2xl text-baer-dark">
+                {!searchTerm && !filterMode && !hasActiveFilters && (categorySlug !== 'all' || departmentSlug !== 'all')
+                  ? 'This section is being stocked'
+                  : 'No products found'}
+              </p>
+              <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-baer-mid">
+                {!searchTerm && !filterMode && !hasActiveFilters && (categorySlug !== 'all' || departmentSlug !== 'all')
+                  ? `${heading} is part of the Baeruthys store, but products have not been added to this section yet.`
+                  : 'Try removing a filter or searching for something else.'}
+              </p>
+              <div className="mt-6 flex flex-wrap justify-center gap-3">
+                <Link href="/#departments" className="btn-outline">Browse departments</Link>
+                <Link href="/shop" className="btn-dark">View all products</Link>
+              </div>
             </div>
           ) : (
             <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 xl:grid-cols-4">
