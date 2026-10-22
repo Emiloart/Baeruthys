@@ -1,17 +1,18 @@
 import Link from 'next/link'
 
 const SHOP_LINKS = [
-  { label: 'New Arrivals', href: '/shop?filter=new' },
-  { label: 'Clothes', href: '/shop?category=clothes' },
-  { label: 'Shoes', href: '/shop?category=shoes' },
-  { label: 'Bags', href: '/shop?category=bags' },
-  { label: 'Accessories', href: '/shop?category=accessories' },
+  { label: 'Fresh Produce', href: '/shop?category=fresh-produce' },
+  { label: 'Pantry & Staples', href: '/shop?category=pantry' },
+  { label: 'Drinks', href: '/shop?category=drinks' },
+  { label: 'Dairy & Eggs', href: '/shop?category=dairy-eggs' },
+  { label: 'Home Care', href: '/shop?category=household' },
+  { label: 'All Departments', href: '/shop' },
 ]
 
 const HELP_LINKS = [
-  { label: 'Shipping Info', href: '/policies/shipping' },
+  { label: 'Shipping Information', href: '/policies/shipping' },
   { label: 'Returns and Refunds', href: '/policies/returns' },
-  { label: 'Contact Us', href: '/policies/contact' },
+  { label: 'Contact Baeruthys', href: '/policies/contact' },
 ]
 
 const COMPANY_LINKS = [
@@ -26,9 +27,7 @@ function Column({ title, links }) {
       <ul className="mt-4 space-y-2.5">
         {links.map((link) => (
           <li key={link.label}>
-            <Link href={link.href} className="text-[13px] text-neutral-400 transition-colors hover:text-white">
-              {link.label}
-            </Link>
+            <Link href={link.href} className="text-[13px] text-neutral-400 transition-colors hover:text-white">{link.label}</Link>
           </li>
         ))}
       </ul>
@@ -39,19 +38,21 @@ function Column({ title, links }) {
 export default function Footer() {
   return (
     <footer className="bg-baer-ink text-neutral-400">
-      <div className="shell grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div className="shell grid gap-10 py-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
-          <div className="font-serif text-lg font-bold tracking-[0.12em] text-white">BAERUTHYS</div>
-          <p className="mt-3 max-w-xs text-[13px] leading-6">Elegance in every detail.</p>
+          <Link href="/" className="font-serif text-lg font-bold tracking-[0.12em] text-white">BAERUTHYS</Link>
+          <p className="mt-2 text-[10px] font-medium uppercase tracking-[0.22em] text-neutral-500">Your everyday store</p>
+          <p className="mt-4 max-w-xs text-[13px] leading-6">Groceries, household essentials and everyday finds, brought together in one growing store.</p>
+          <Link href="/shop" className="mt-5 inline-block text-[13px] font-semibold text-white transition-colors hover:text-baer-gold">Shop all departments →</Link>
         </div>
-        <Column title="Shop" links={SHOP_LINKS} />
-        <Column title="Help" links={HELP_LINKS} />
-        <Column title="Company" links={COMPANY_LINKS} />
+        <Column title="Departments" links={SHOP_LINKS} />
+        <Column title="Customer Care" links={HELP_LINKS} />
+        <Column title="Information" links={COMPANY_LINKS} />
       </div>
       <div className="border-t border-neutral-800">
         <div className="shell flex flex-col justify-between gap-2 py-5 text-xs text-neutral-500 sm:flex-row">
           <span>&copy; {new Date().getFullYear()} Baeruthys. All rights reserved.</span>
-          <span>Secure payments. Encrypted checkout.</span>
+          <span>Prices displayed in Nigerian naira (NGN).</span>
         </div>
       </div>
     </footer>
