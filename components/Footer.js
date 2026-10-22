@@ -1,12 +1,9 @@
 import Link from 'next/link'
+import { DEPARTMENTS } from '../data/products'
 
 const SHOP_LINKS = [
-  { label: 'Fresh Produce', href: '/shop?category=fresh-produce' },
-  { label: 'Pantry & Staples', href: '/shop?category=pantry' },
-  { label: 'Drinks', href: '/shop?category=drinks' },
-  { label: 'Dairy & Eggs', href: '/shop?category=dairy-eggs' },
-  { label: 'Home Care', href: '/shop?category=household' },
-  { label: 'All Departments', href: '/shop' },
+  ...DEPARTMENTS.map((department) => ({ label: department.name, href: `/shop?department=${department.slug}` })),
+  { label: 'Shop Everything', href: '/shop' },
 ]
 
 const HELP_LINKS = [
