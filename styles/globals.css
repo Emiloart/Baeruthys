@@ -59,3 +59,103 @@
     @apply mx-auto h-0.5 w-11 bg-baer-gold;
   }
 }
+
+
+@layer components {
+  .product-ad-window {
+    @apply overflow-hidden outline-none;
+  }
+
+  .product-ad-window:focus-visible {
+    @apply ring-2 ring-baer-gold ring-offset-2;
+  }
+
+  .product-ad-track {
+    display: flex;
+    width: max-content;
+    animation: baeruthys-ad-scroll 48s linear infinite;
+    will-change: transform;
+  }
+
+  .product-ad-group {
+    display: flex;
+    flex: none;
+    gap: 1rem;
+    padding-right: 1rem;
+  }
+
+  .product-ad-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 38%;
+    width: min(78vw, 520px);
+    min-height: 220px;
+    overflow: hidden;
+    border: 1px solid #E7DCCF;
+    background: #FFFFFF;
+  }
+
+  .product-ad-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 1.25rem;
+  }
+
+  .product-ad-image {
+    display: block;
+    min-height: 100%;
+    overflow: hidden;
+    background: #F4EEE5;
+  }
+
+  .product-ad-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    object-fit: cover;
+    transition: transform 500ms ease;
+  }
+
+  .product-ad-card:hover .product-ad-image img {
+    transform: scale(1.05);
+  }
+
+  .product-ad-window:hover .product-ad-track,
+  .product-ad-window:focus .product-ad-track,
+  .product-ad-window:focus-within .product-ad-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes baeruthys-ad-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (max-width: 640px) {
+    .product-ad-card {
+      width: 84vw;
+      grid-template-columns: minmax(0, 1fr) 34%;
+      min-height: 210px;
+    }
+
+    .product-ad-copy {
+      padding: 1rem;
+    }
+
+    .product-ad-image img {
+      min-height: 210px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .product-ad-track {
+      animation: none;
+    }
+
+    .product-ad-group[aria-hidden="true"] {
+      display: none;
+    }
+  }
+}
