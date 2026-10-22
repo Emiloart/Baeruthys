@@ -2,7 +2,8 @@ import Link from 'next/link'
 import Layout from '../components/Layout'
 import ProductCard from '../components/ProductCard'
 import ProductAdMarquee from '../components/ProductAdMarquee'
-import { CATEGORIES, PRODUCTS, getFeaturedProducts, getNewArrivals } from '../data/products'
+import DepartmentSection from '../components/DepartmentSection'
+import { DEPARTMENTS, getFeaturedProducts, getNewArrivals } from '../data/products'
 import { DELIVERY_METHODS, FREE_SHIPPING_THRESHOLD } from '../lib/site'
 import { formatNaira } from '../lib/format'
 
@@ -22,20 +23,6 @@ function SectionHeading({ title, subtitle, href, linkLabel = 'Shop all' }) {
   )
 }
 
-const CATEGORY_IMAGES = {
-  'fresh-produce': 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=85',
-  pantry: 'https://images.unsplash.com/photo-1604719312566-8912e9c8a213?auto=format&fit=crop&w=900&q=85',
-  drinks: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=900&q=85',
-  'dairy-eggs': 'https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=900&q=85',
-  'meat-seafood': 'https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=900&q=85',
-  bakery: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=85',
-  household: 'https://images.unsplash.com/photo-1585421514284-efb74c2b69ba?auto=format&fit=crop&w=900&q=85',
-  'personal-care': 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=900&q=85',
-  'home-kitchen': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=900&q=85',
-  electronics: 'https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=900&q=85',
-  fashion: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=85',
-  'baby-kids': 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=900&q=85',
-}
 
 export default function Home() {
   const featured = getFeaturedProducts(8)
@@ -115,24 +102,23 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="departments" className="bg-baer-bg py-12 sm:py-16">
+      <section id="departments" className="bg-baer-bg py-10 sm:py-12">
         <div className="shell">
-          <SectionHeading title="Explore departments" subtitle="A growing range for the kitchen, home, personal care and beyond." href="/shop" />
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-6">
-            {CATEGORIES.map((category) => (
-              <Link key={category.slug} href={`/shop?category=${category.slug}`} className="group overflow-hidden rounded-sm border border-baer-bdr bg-white">
-                <div className="aspect-[5/4] overflow-hidden bg-baer-surf">
-                  <img src={CATEGORY_IMAGES[category.slug] || CATEGORY_IMAGES.pantry} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                </div>
-                <div className="flex min-h-14 items-center justify-between gap-2 px-3 py-3 sm:px-4">
-                  <span className="text-xs font-semibold text-baer-dark sm:text-[13px]">{category.name}</span>
-                  <span className="text-baer-gold transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
-                </div>
+          <SectionHeading title="Shop by department" subtitle="See the full range before you start. Choose a department or explore its subdepartments below." href="/shop" linkLabel="Shop everything" />
+          <div className="grid grid-cols-2 gap-x-6 sm:grid-cols-3 lg:grid-cols-5">
+            {DEPARTMENTS.map((department) => (
+              <Link key={department.slug} href={`/shop?department=${department.slug}`} className="group flex items-start justify-between gap-3 border-t border-baer-bdr py-4 text-sm font-semibold text-baer-dark transition-colors hover:text-baer-gold">
+                <span>{department.name}</span>
+                <span aria-hidden="true">↗</span>
               </Link>
             ))}
           </div>
         </div>
       </section>
+
+      {DEPARTMENTS.map((department, index) => (
+        <DepartmentSection key={department.slug} department={department} index={index} />
+      ))}
 
       <section className="border-y border-baer-bdr bg-baer-surf py-12 sm:py-16">
         <div className="shell">
