@@ -2,31 +2,40 @@ import Link from 'next/link'
 
 const ADVERTISEMENTS = [
   {
-    eyebrow: 'Fresh from the market',
-    title: 'Make fresh the centrepiece.',
-    description: 'Explore fruit, vegetables and everyday produce.',
-    href: '/shop?category=fresh-produce',
+    eyebrow: 'Food & Groceries',
+    title: 'Build a better weekly shop.',
+    description: 'Fresh produce, pantry staples, chilled food and more.',
+    href: '/shop?department=food-groceries',
     image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=720&q=85',
-    imageAlt: 'Fresh fruit and vegetables',
-    action: 'Shop fresh produce',
+    imageAlt: 'Fresh produce and groceries',
+    action: 'Explore food',
   },
   {
-    eyebrow: 'Stock the pantry',
-    title: 'The everyday essentials.',
-    description: 'Find staples for your next kitchen restock.',
-    href: '/shop?category=pantry',
-    image: 'https://images.unsplash.com/photo-1604719312566-8912e9c8a213?auto=format&fit=crop&w=720&q=85',
-    imageAlt: 'Pantry staples on grocery shelves',
-    action: 'Browse pantry',
+    eyebrow: 'Home & Living',
+    title: 'Make more of your space.',
+    description: 'Explore appliances and essentials for every room.',
+    href: '/shop?department=home-living',
+    image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=720&q=85',
+    imageAlt: 'Home appliances and kitchen essentials',
+    action: 'Explore home',
   },
   {
-    eyebrow: 'Better everyday living',
-    title: 'Care for the whole home.',
-    description: 'Explore practical household essentials.',
-    href: '/shop?category=household',
-    image: 'https://images.unsplash.com/photo-1585421514284-efb74c2b69ba?auto=format&fit=crop&w=720&q=85',
-    imageAlt: 'Household cleaning essentials',
-    action: 'Shop home care',
+    eyebrow: 'Electronics & Technology',
+    title: 'Useful tech for every day.',
+    description: 'Discover personal technology and everyday accessories.',
+    href: '/shop?department=electronics-technology',
+    image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=720&q=85',
+    imageAlt: 'Consumer electronics and technology',
+    action: 'Explore technology',
+  },
+  {
+    eyebrow: 'Beauty & Personal Care',
+    title: 'The essentials that are yours.',
+    description: 'Browse everyday care, grooming and beauty products.',
+    href: '/shop?department=beauty-personal-care',
+    image: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=720&q=85',
+    imageAlt: 'Beauty and personal care products',
+    action: 'Explore personal care',
   },
 ]
 
@@ -50,15 +59,15 @@ function AdCard({ ad }) {
 
 export default function ProductAdMarquee() {
   return (
-    <section className="product-ad-section border-y border-baer-bdr bg-baer-cream py-8 sm:py-10" aria-label="Featured product promotions">
+    <section className="product-ad-section border-y border-baer-bdr bg-baer-cream py-8 sm:py-10" aria-label="Featured department promotions">
       <div className="shell mb-5 flex items-end justify-between gap-4">
         <div>
-          <p className="eyebrow">Around the store</p>
-          <h2 className="mt-2 font-serif text-2xl font-bold text-baer-dark sm:text-3xl">Worth a look.</h2>
+          <p className="eyebrow">Across Baeruthys</p>
+          <h2 className="mt-2 font-serif text-2xl font-bold text-baer-dark sm:text-3xl">More to explore.</h2>
         </div>
         <span className="hidden text-xs text-baer-mid sm:block">Discover something for your next shop</span>
       </div>
-      <div className="product-ad-window" tabIndex={0} aria-label="Moving product advertisements. Hover or focus to pause.">
+      <div className="product-ad-window" tabIndex={0} aria-label="Moving department promotions. Hover or focus to pause.">
         <div className="product-ad-track">
           <div className="product-ad-group">
             {ADVERTISEMENTS.map((ad) => <AdCard key={ad.eyebrow} ad={ad} />)}
