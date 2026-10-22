@@ -88,3 +88,24 @@ Added on 2026-10-22. Each file was committed to `main` before proceeding to the 
 | `pages/index.js` | Mounted the advertising strip directly below the homepage hero. | `0c5cb2f8cfeb11748c54c27de9d756cc20b2f394` |
 
 The current cards are editorial category promotions, not paid advertiser inventory and do not claim unverified discounts. Future campaign data can be connected to a managed promotions source. The browser animation and production build have not been visually tested in this session.
+
+
+## 10. Parent department architecture and discovery UX
+
+Implemented on 2026-10-22. Each source file was committed directly to `main` before the next file was written.
+
+The catalogue now defines ten parent departments in `DEPARTMENTS`, with the leaf categories in `CATEGORIES` assigned to a parent. Food & Groceries contains all food-related subdepartments. Home & Living is the single parent for appliances, kitchen and dining, cleaning and household care, furniture, bedding, storage, lighting and home improvement. Home Appliances and Home & Living are not separate top-level departments.
+
+| File | Change | Commit |
+|---|---|---|
+| `data/products.js` | Added the parent department taxonomy, category-to-parent relationships, department lookup helpers and a broader subdepartment list. Existing product category slugs were retained. | `8d4019fc04e341a05b3c44f64faa4c351ec3c7b1` |
+| `components/DepartmentSection.js` | Added reusable department hero sections and horizontally scrollable subdepartment image carousels. | `8764c08a99ba56383e91d67e46b395ba573be665`, followed by image-source corrections in `78e74d7ca71207216d588877864cc32531ef0f2c` |
+| `pages/index.js` | Replaced the flat subcategory grid with an all-departments directory and dedicated parent-department sections. Broadened hero imagery and removed decorative pill and numbered-circle treatments. | `54dc5d177953719e6bcc38daf756d7a8ed427657`, followed by hero and visual refinement in `a4c55bea7eca0774ce081435740ecfbe9ad9f11c` |
+| `pages/shop.js` | Added parent department filtering and nested department/subdepartment groups in the shop sidebar. | `849c1215a09d740e8312c8a933d513cb8d624172` |
+| `components/Header.js` | Changed desktop navigation to key parent departments and grouped all subdepartments under their parents in the mobile menu. | `ca9f45900e48e9099f6e79d50be2bc526955f281` |
+| `components/Footer.js` | Updated the footer department directory to list parent departments. | `ccaa430e2a51202950275a4121cd0e246bc2531e` |
+| `components/ProductAdMarquee.js` | Changed the moving banner to promote Food & Groceries, Home & Living, Electronics & Technology, and Beauty & Personal Care. | `02a7451cc2fe38afdb964dd338de5b6600f2d2e8` |
+| `README.md` | Documented the parent/child taxonomy and discovery routes. | `195598b7a18f4f242da40e805f658061656a033a` |
+| `data/products.js` | Corrected the office/stationery department image source. | `7dcb406df20436f7563695903d5ebb4b752527c3` |
+
+The category catalogue intentionally includes planned subdepartments with no demonstration products yet. Parent department routes aggregate products whose categories belong to that parent. Payment processing remains disabled. A local production build and browser visual QA have not been run in this session.
