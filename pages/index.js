@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Layout from '../components/Layout'
 import ProductCard from '../components/ProductCard'
+import ProductAdMarquee from '../components/ProductAdMarquee'
 import { CATEGORIES, PRODUCTS, getFeaturedProducts, getNewArrivals } from '../data/products'
 import { DELIVERY_METHODS, FREE_SHIPPING_THRESHOLD } from '../lib/site'
 import { formatNaira } from '../lib/format'
@@ -94,6 +95,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <ProductAdMarquee />
 
       <section className="border-y border-baer-bdr bg-white">
         <div className="shell grid gap-4 py-5 sm:grid-cols-3 sm:gap-6">
