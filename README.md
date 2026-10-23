@@ -101,4 +101,12 @@ pages/        Next.js pages and commerce routes
 styles/       Global styles and Tailwind layers
 ```
 
+## Documentation
+
+- [Architecture](docs/ARCHITECTURE.md): current frontend structure, data flow and the boundary between prototype and production services.
+- [Department Taxonomy](docs/DEPARTMENT_TAXONOMY.md): parent departments, subdepartments, URL conventions and rules for maintaining the hierarchy.
+- [Development Guide](docs/DEVELOPMENT.md): local setup, scripts, coding conventions and review checklist.
+- [Launch Readiness](docs/LAUNCH_READINESS.md): production gaps and the evidence required before launch.
+- [Build Log](docs/BUILD_LOG.md): implementation history, commits and validation status.
+
 See [docs/BUILD_LOG.md](docs/BUILD_LOG.md) for build history, verified status and the next implementation steps.
