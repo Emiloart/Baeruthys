@@ -109,3 +109,18 @@ The catalogue now defines ten parent departments in `DEPARTMENTS`, with the leaf
 | `data/products.js` | Corrected the office/stationery department image source. | `7dcb406df20436f7563695903d5ebb4b752527c3` |
 
 The category catalogue intentionally includes planned subdepartments with no demonstration products yet. Parent department routes aggregate products whose categories belong to that parent. Payment processing remains disabled. A local production build and browser visual QA have not been run in this session.
+
+
+## 11. Documentation expansion
+
+Updated on 2026-10-23. Each documentation file was committed before moving to the next file.
+
+| File | Purpose | Commit |
+|---|---|---|
+| `docs/DEPARTMENT_TAXONOMY.md` | Documents the 10 parent departments, 37 subdepartments, URL conventions, category-parent contract, discovery behaviour and taxonomy change checklist. | `4d718555b56174f6cb3ff396dda3061333e8c840` |
+| `docs/ARCHITECTURE.md` | Explains the current Next.js Pages Router structure, catalogue data model, browser-local basket/wishlist, key user flows and unimplemented production boundaries. | `f5fa552c6d8c16a9b69a6ef6535f1b24ea0313ae` |
+| `docs/DEVELOPMENT.md` | Adds local setup, script reference, catalogue and styling rules, department change checklist, commit discipline and review criteria. | `a418d418cd1c38381bd002671648787c3a24d3ff` |
+| `docs/LAUNCH_READINESS.md` | Adds a production readiness checklist for build quality, catalogue correctness, pricing, privacy, payments, fulfilment, security, analytics and release approval. | `f582394fb45dd4b0da04bb7eb83eb954c4eec70c` |
+| `README.md` | Links the new guides and clarifies that the current taxonomy is broader than the populated demonstration catalogue. | `fff2516708ffbd4c4bdab87fbdff5fec2eed14b3` |
+
+The new documentation distinguishes implemented frontend behaviour from proposed or unverified production capabilities. It does not claim that the production build, browser QA, payments, inventory or fulfilment have been tested or connected.
